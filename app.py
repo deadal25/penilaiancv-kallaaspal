@@ -464,7 +464,16 @@ if menu == "Single CV":
         top5["Education"] = top5["edu"].apply(lambda x: f"{x*100:.2f}%")
         
         df_to_show = top5[["Rank", "job_title", "Score", "Skill", "Experience", "Education"]]
+        df_to_show = df_to_show.rename(columns={
+            "job_title": "Posisi",
+            "Score": "Skor CV",
+            "Skill": "Kemampuan",
+            "Experience": "Pengalaman",
+            "Education": "Pendidikan"
+        })
+
         st.table(style_header(df_to_show))
+        # st.table(style_header(df_to_show))
 
         # --- SAVE DATA SEMUA JOB KE DATABASE ---
         # Kita melakukan perulangan untuk setiap baris di df_rank 
@@ -473,6 +482,51 @@ if menu == "Single CV":
         # --- SAVE DATA TOP 5 JOB KE DATABASE ---
         # Kita ambil hanya 5 posisi dengan skor tertinggi untuk pelamar ini
         df_top5_save = df_rank.head(5)
+
+        st.markdown("### 🧠 Analisis & Saran Pengembangan")
+        isi_feedback = generate_feedback(
+            cv_parts=cv_extracted, 
+            best_job=selected_job, 
+            score=score,
+            skill=skill_score/100,
+            exp=exp_score/100,
+            edu=edu_score/100
+        )
+        # Fix newline
+        isi_feedback = isi_feedback.replace("\n", "<br>")
+        warna_border = "#28A745" if score > 75 else "#FFC107" if score > 50 else "#DC3545"
+        st.markdown(f"""
+        <div style="
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 18px;
+            border: 1px solid #eaeaea;
+            border-left: 6px solid {warna_border};
+            box-shadow: 0 8px 25px rgba(0,0,0,0.04);
+            line-height: 1.8;
+            max-width: 100%;
+            width:100%;
+        ">
+            <div style="
+                color: #444;
+                font-size: 15px;
+                text-align: justify;
+                font-family: 'Segoe UI', sans-serif;
+            ">
+                {isi_feedback}
+            </div>
+            <div style="
+                margin-top: 15px;
+                padding-top: 10px;
+                border-top: 1px dashed #ddd;
+                font-size: 12px;
+                color: #888;
+            ">
+                Hasil ini dihasilkan berdasarkan analisis otomatis dan dapat digunakan sebagai referensi awal dalam proses seleksi.
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        st.markdown("<br>", unsafe_allow_html=True)
 
         with st.spinner(f"💾 Menyimpan Top 5 rekomendasi untuk {nama}..."):
             for index, row_job in df_top5_save.iterrows():
@@ -668,11 +722,11 @@ elif menu == "Leaderboard":
 
         # Rename kolom untuk tabel
         df_table = df_table.rename(columns={
-            "rank": "Rank", name_col: "Nama CV", job_col: "Job Title",
-            "score": "Score", "skill": "Skill", "exp": "Exp", "edu": "Edu"
+            "rank": "Rank", name_col: "Nama CV", job_col: "Posisi",
+            "score": "Skor CV", "skill": "Kemampuan", "exp": "Pengalaman", "edu": "Pendidikan"
         })
 
-        available_cols = ["Rank", "Nama CV", "Job Title", "Score", "Skill", "Exp", "Edu"]
+        available_cols = ["Rank", "Nama CV", "Posisi", "Skor CV", "Kemampuan", "Pengalaman", "Pendidikan"]
         cols_to_show = [c for c in available_cols if c in df_table.columns]
         
         st.table(style_leaderboard_custom(df_table[cols_to_show]))
@@ -894,10 +948,10 @@ elif menu == "Bulk CV":
         # Menentukan kolom tabel berdasarkan mode
         if mode == "Manual":
             final_cols = ["rank", "cv", "job_target", "best_ai", "score", "skill", "exp", "edu"]
-            col_names = {"rank": "Rank", "cv": "Nama CV", "job_target": "Job Target", "best_ai": "Saran AI", "score": "Skor", "skill": "Kemampuan", "exp": "Pengalaman", "edu": "Pendidikan"}
+            col_names = {"rank": "Rank", "cv": "Nama CV", "job_target": "Job Pilihan", "best_ai": "Saran Job", "score": "Skor CV", "skill": "Kemampuan", "exp": "Pengalaman", "edu": "Pendidikan"}
         else:
             final_cols = ["rank", "cv", "job_target", "score", "skill", "exp", "edu"]
-            col_names = {"rank": "Rank", "cv": "Nama CV", "job_target": "Best Job", "score": "Skor", "skill": "Kemampuan", "exp": "Pengalaman", "edu": "Pendidikan"}
+            col_names = {"rank": "Rank", "cv": "Nama CV", "job_target": "Job Terbaik", "score": "Skor CV", "skill": "Kemampuan", "exp": "Pengalaman", "edu": "Pendidikan"}
 
         st.table(style_bulk(df_table[final_cols].rename(columns=col_names)))
 

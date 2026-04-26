@@ -1,31 +1,31 @@
 #TAMBAHAN
 from utils.scoring import interpret_score
 
-
 def generate_feedback(cv_parts, best_job, score, skill, exp, edu):
-
+    s_pct, e_pct, d_pct = skill * 100, exp * 100, edu * 100
     feedback = f"""
-CV Anda menunjukkan latar belakang pendidikan {cv_parts['degree']} dengan jurusan {cv_parts['major']}. 
-Berdasarkan analisis kecocokan terhadap posisi {best_job}, diperoleh skor keseluruhan sebesar {round(score,2)}% 
-yang termasuk dalam kategori {interpret_score(score)}.
-
-Dari hasil evaluasi, aspek kemampuan (skill) memiliki skor {round(skill*100,2)}%, 
-pengalaman {round(exp*100,2)}%, dan pendidikan {round(edu*100,2)}%.
-
-Hal ini menunjukkan bahwa """
-
-    if skill < 0.6:
-        feedback += "kemampuan teknis Anda masih perlu ditingkatkan agar lebih sesuai dengan kebutuhan pekerjaan. "
-
-    if exp < 0.6:
-        feedback += "pengalaman kerja yang relevan masih kurang dan sebaiknya diperkuat dengan pengalaman praktis atau proyek nyata. "
-
-    if edu < 0.6:
-        feedback += "latar belakang pendidikan belum sepenuhnya selaras dengan posisi yang dituju. "
-
-    feedback += """
-Disarankan untuk menambahkan lebih banyak detail terkait proyek, tools yang digunakan, serta pencapaian konkret dalam CV 
-agar meningkatkan nilai kesesuaian dengan posisi yang diinginkan.
-"""
-
+    CV Anda menunjukkan profil akademik sebagai lulusan {cv_parts['degree']} {cv_parts['major']}. 
+    Melalui analisis mendalam menggunakan Sentence-BERT terhadap posisi <b>{best_job}</b>, 
+    sistem memberikan skor kesesuaian sebesar <b>{round(score, 2)}%</b> yang dikategorikan sebagai <b>{interpret_score(score)}</b>.
+    """
+    kelebihan = []
+    if s_pct >= 70: kelebihan.append(f"penguasaan teknis (skill) yang sangat kuat di angka {round(s_pct,1)}%")
+    if e_pct >= 70: kelebihan.append(f"rekam jejak pengalaman yang sangat relevan ({round(e_pct,1)}%)")
+    if d_pct >= 70: kelebihan.append(f"latar belakang pendidikan yang sangat linier ({round(d_pct,1)}%)")
+    if kelebihan:
+        feedback += f"<b>Kekuatan Utama:</b> Profil Anda memiliki keunggulan pada " + ", serta ".join(kelebihan) + ". "
+        feedback += "Hal ini mengindikasikan bahwa secara fundamental, Anda memiliki aset yang kuat untuk berkontribusi pada posisi ini"
+    feedback += "<b>Analisis Pengembangan:</b> "
+    if s_pct < 60:
+        feedback += f"Terdapat celah kompetensi pada aspek teknis ({round(s_pct,1)}%). Kami menyarankan Anda untuk lebih eksplisit dalam mencantumkan <i>tools</i>, <i>software</i>, atau metodologi spesifik yang digunakan pada pekerjaan sebelumnya. "
+    else:
+        feedback += "Aspek kemampuan teknis Anda sudah cukup bersaing, namun tetap perlu diperbarui dengan tren industri terbaru. "
+    if e_pct < 60:
+        feedback += f"Selain itu, bobot pengalaman kerja ({round(e_pct,1)}%) menunjukkan adanya ketidaksesuaian durasi atau tanggung jawab dengan profil ideal. Fokuslah pada penulisan <i>achievement-based CV</i> daripada sekadar daftar tugas. "
+    if d_pct < 60:
+        feedback += f"Dari sisi edukasi ({round(d_pct,1)}%), terlihat adanya sedikit divergensi antara jurusan atau konsentrasi studi dengan kualifikasi jabatan yang spesifik. "
+    feedback += f"""
+    <b>Saran Strategis:</b> Untuk meningkatkan daya saing, cobalah untuk mengintegrasikan kata kunci (keywords) yang ditemukan pada deskripsi pekerjaan <i>{best_job}</i> ke dalam ringkasan profesional Anda. 
+    Pastikan setiap poin pengalaman menyertakan hasil kuantitatif (misalnya: meningkatkan efisiensi sebesar 20%) untuk memberikan bukti nyata atas klaim kemampuan Anda.
+    """
     return feedback
