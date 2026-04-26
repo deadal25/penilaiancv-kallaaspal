@@ -539,9 +539,8 @@ if menu == "Single CV":
             """, unsafe_allow_html=True)
         
         st.markdown(" ", unsafe_allow_html=True)
-
             
-    st.info("👈 **Mulai Sekarang:** Silakan pilih posisi pekerjaan dan upload file CV Anda melalui sidebar di sebelah kiri.")
+        st.info("👈 **Mulai Sekarang:** Silakan pilih posisi pekerjaan dan upload file CV Anda melalui sidebar di sebelah kiri.")
 # LEADERBOARD
 # =========================================================
 elif menu == "Leaderboard":
