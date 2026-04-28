@@ -19,6 +19,8 @@ def parse_cv_structured(text):
         degree = "d4"
     elif re.search(r"\bd3\b", text):
         degree = "d3"
+    elif re.search(r"\bsmp\b", text):
+        degree = "smp"
     elif "sma" in text:
         degree = "sma"
 

@@ -265,7 +265,7 @@ st.markdown("""
     ">
         <div>
             <h1 style="
-                margin: 0;
+                margin: 0px;
                 color: #0B5334;
                 font-size: 30px;
                 font-weight: 800;
@@ -273,7 +273,7 @@ st.markdown("""
                 Dashboard Penilaian CV
             </h1>
             <p style="
-                margin: 6px 0 0 0;
+                margin: 4px 0 0 0;
                 color: #555;
                 font-size: 15px;
             ">
@@ -355,7 +355,7 @@ if menu == "Single CV":
             st.error("⚠️ Mohon isi Nama Lengkap pelamar.")
             st.stop()
 
-        with st.spinner("⏳ Menganalisis CV..."):
+        with st.spinner("⏳⏳⏳ Menganalisis CV..."):
             # Proses Backend
             text = extract_text_from_pdf(file)
             cv_extracted = parse_cv_structured(text)
@@ -455,7 +455,17 @@ if menu == "Single CV":
         
         
         # --- TABEL TOP 5 ---
-        st.markdown("### 📊 Top 5 Job")
+        # st.markdown("### 📊 Top 5 Job")
+        st.markdown("""
+        <h3 style="
+            color:#0B5334;
+            font-size:22px;
+            font-weight:700;
+            margin-bottom:10px;
+        ">
+        📊 Top 5 Job
+        </h3>
+        """, unsafe_allow_html=True)
         top5 = df_rank.head(5).copy().reset_index(drop=True)
         top5["Rank"] = top5.index + 1
         top5["Score"] = top5["score"].apply(lambda x: f"{x*100:.2f}%")
@@ -483,14 +493,24 @@ if menu == "Single CV":
         # Kita ambil hanya 5 posisi dengan skor tertinggi untuk pelamar ini
         df_top5_save = df_rank.head(5)
 
-        st.markdown("### 🧠 Analisis & Saran Pengembangan")
+        # st.markdown("### 🧠 Analisis & Saran Pengembangan")
+        st.markdown("""
+        <h3 style="
+            color:#0B5334;
+            font-size:22px;
+            font-weight:700;
+            margin-bottom:10px;
+        ">
+        🧠 Analisis & Saran Pengembangan
+        </h3>
+        """, unsafe_allow_html=True)
         isi_feedback = generate_feedback(
             cv_parts=cv_extracted, 
             best_job=selected_job, 
-            score=score,
-            skill=skill_score/100,
-            exp=exp_score/100,
-            edu=edu_score/100
+            score=float(score),
+            skill=float(skill_score)/100,
+            exp=float(exp_score)/100,
+            edu=float(edu_score)/100
         )
         # Fix newline
         isi_feedback = isi_feedback.replace("\n", "<br>")
@@ -512,6 +532,7 @@ if menu == "Single CV":
                 font-size: 15px;
                 text-align: justify;
                 font-family: 'Segoe UI', sans-serif;
+                margin-top:-30px;
             ">
                 {isi_feedback}
             </div>
@@ -549,9 +570,18 @@ if menu == "Single CV":
 
     elif not file:
     # --- Tampilan Welcome / Tutorial ---
-        st.markdown("### 🚀 Selamat Datang di Dashboard Penilaian CV")
-        st.write("Aplikasi ini membantu Anda menyeleksi kandidat terbaik menggunakan AI dengan cepat dan akurat. Berikut adalah panduan fitur utamanya:")
-        
+        st.markdown("""
+            <h3 style="color:#0B5334; margin-bottom:-10px;">
+            🚀 Selamat Datang di Dashboard Penilaian CV
+            </h3>
+            """, unsafe_allow_html=True)
+        st.markdown("""
+            <p style="color:#0B5334; font-size:16px;">
+            Aplikasi ini membantu Anda menyeleksi kandidat terbaik menggunakan AI dengan cepat dan akurat. 
+            Berikut adalah panduan fitur utamanya:
+            </p>
+            """, unsafe_allow_html=True)
+                    
         col1, col2, col3 = st.columns(3)
         
         with col1:
@@ -565,7 +595,7 @@ if menu == "Single CV":
                 </p>
             </div>
             """, unsafe_allow_html=True)
-            
+        st.markdown(" ", unsafe_allow_html=True)    
         with col2:
             st.markdown("""
             <div style="background-color: #fdfaf0; padding: 20px; border-radius: 10px; border-left: 5px solid #f39c12; height: 100%;">
@@ -578,7 +608,7 @@ if menu == "Single CV":
                 </p>
             </div>
             """, unsafe_allow_html=True)
-            
+        st.markdown(" ", unsafe_allow_html=True)    
         with col3:
             st.markdown("""
             <div style="background-color: #f0f4f7; padding: 20px; border-radius: 10px; border-left: 5px solid #2980b9; height: 100%;">
@@ -693,7 +723,17 @@ elif menu == "Leaderboard":
 
     if not df_filtered.empty:
         # --- GRAFIK ---
-        st.subheader("📈 Grafik Skor (%)")
+        # st.subheader("📈 Grafik Skor (%)")
+        st.markdown("""
+            <h3 style="
+                color:#0B5334;
+                font-size:22px;
+                font-weight:700;
+                margin-bottom:10px;
+            ">
+            📈 Grafik Skor (%)
+            </h3>
+            """, unsafe_allow_html=True)
         df_chart = df_filtered.copy()
         
         # Pastikan skor dalam skala 0-100
@@ -711,7 +751,17 @@ elif menu == "Leaderboard":
 
 
         # --- TABEL ---
-        st.subheader("📋 Detail Tabel Peringkat")
+        # st.subheader("📋 Detail Tabel Peringkat")
+        st.markdown("""
+            <h3 style="
+                color:#0B5334;
+                font-size:22px;
+                font-weight:700;
+                margin-bottom:10px;
+            ">
+            📋 Detail Tabel Peringkat
+            </h3>
+            """, unsafe_allow_html=True)
         df_table = df_filtered.copy()
 
         # Format tampilan persen
@@ -812,7 +862,7 @@ elif menu == "Bulk CV":
     # --- LOGIC PROSES ---
     if files and process_btn:
         results = []
-        with st.spinner("⏳ Menganalisis semua CV..."):
+        with st.spinner("⏳⏳⏳Menganalisis semua CV..."):
             for f in files:
                 text = extract_text_from_pdf(f)
                 cv = parse_cv_structured(text)
@@ -922,7 +972,18 @@ elif menu == "Bulk CV":
 
 
         # --- GRAFIK DISTRIBUSI ---
-        st.subheader("📈 Distribusi Skor Seluruh Kandidat")
+        # st.subheader("📈 Distribusi Skor Seluruh Kandidat")
+        st.markdown("""
+            <h3 style="
+                color:#0B5334;
+                font-size:22px;
+                font-weight:700;
+                margin-bottom:10px;
+            ">
+            📈 Distribusi Skor Seluruh Kandidat
+            </h3>
+            """, unsafe_allow_html=True)
+            
         chart = alt.Chart(df_res).mark_bar(color='#28A745', cornerRadiusTopLeft=8, cornerRadiusTopRight=8).encode(
             x=alt.X("cv:N", sort="-y", title="Nama File CV"),
             y=alt.Y("score:Q", title="Skor (%)"),
@@ -933,7 +994,17 @@ elif menu == "Bulk CV":
         st.altair_chart(chart + text, use_container_width=True)
 
         # --- TABEL HASIL GAYA HIJAU KALLA ---
-        st.subheader("📋 Tabel Penilaian Keseluruhan")
+        # st.subheader("📋 Tabel Penilaian Keseluruhan")
+        st.markdown("""
+            <h3 style="
+                color:#0B5334;
+                font-size:22px;
+                font-weight:700;
+                margin-bottom:10px;
+            ">
+            📋 Tabel Penilaian Keseluruhan
+            </h3>
+            """, unsafe_allow_html=True)
         
         df_table = df_res.copy()
         for col in ["score", "skill", "exp", "edu"]:
@@ -957,8 +1028,17 @@ elif menu == "Bulk CV":
 
         # --- RANGKUMAN DETEKSI JOB ---
         if mode == "Auto":
-            st.markdown("---")
-            st.subheader("📊 Sebaran Deteksi Posisi")
+            # st.subheader("📊 Sebaran Deteksi Posisi")
+            st.markdown("""
+            <h3 style="
+                color:#0B5334;
+                font-size:22px;
+                font-weight:700;
+                margin-bottom:10px;
+            ">
+            📊 Sebaran Deteksi Posisi
+            </h3>
+            """, unsafe_allow_html=True)
             job_counts = df_res['job_target'].value_counts()
             cols_job = st.columns(4)
             for idx, (j_name, count) in enumerate(job_counts.items()):

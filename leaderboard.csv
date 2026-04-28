@@ -12,8 +12,8 @@ dfgh,2t6232,Non Aspal Procurement Staff,Equipment Maintenance Staff,56.21,56.72,
 as,6289521142023,Finance Staff,Finance Staff,73.52,70.55,73.82,87.21
 as,6289521142023,Cashflow Management Staff,Finance Staff,67.79,63.37,69.39,83.48
 as,6289521142023,Budget Control Analyst,Finance Staff,67.4,62.75,69.2,83.48
-as,6289521142023,Accounting Staff,Finance Staff,67.04,72.6,60.03,67.31
-as,6289521142023,Tax Staff,Finance Staff,66.1,61.53,73.49,59.4
+as,628952114223,Accounting Staff,Tanker Truck Driver,52.4,60.08,51.66,16.88
+as,628952114223,Tax Staff,Tanker Truck Driver,52.22,55.99,56.18,17.53
 alqadri,6289521142023,Budget Control Analyst,Budget Control Analyst,77.56,79.26,73.96,83.48
 alqadri,6289521142023,Tax Staff,Budget Control Analyst,60.77,55.75,67.38,59.4
 alqadri,6289521142023,Finance Staff,Budget Control Analyst,60.42,58.18,56.51,87.21
@@ -44,3 +44,32 @@ kucing,6289521142023,Budget Control Analyst,Tax Staff,60.67,55.48,61.46,83.48
 kucing,6289521142023,Accounting Staff,Tax Staff,60.15,60.53,57.89,67.31
 kucing,6289521142023,Finance Staff,Tax Staff,58.57,53.15,58.19,87.21
 kucing,6289521142023,Marketing Region Analyst,Tax Staff,56.84,55.54,57.95,58.94
+andi,6289521142023,Tanker Truck Driver,Tanker Truck Driver,57.54,58.36,53.48,69.66
+andi,6289521142023,Driver,Tanker Truck Driver,55.64,57.17,50.23,69.66
+andi,6289521142023,Accounting Staff,Finance Staff,67.04,72.6,60.03,67.31
+andi,6289521142023,Tax Staff,Finance Staff,66.1,61.53,73.49,59.4
+andi,6289521142023,HSE Associates,Tanker Truck Driver,51.96,57.96,53.77,14.68
+andi,6289521142023,Finance Staff,Finance Staff,73.52,70.55,73.82,87.21
+andi,6289521142023,Cashflow Management Staff,Finance Staff,67.79,63.37,69.39,83.48
+andi,6289521142023,Budget Control Analyst,Finance Staff,67.4,62.75,69.2,83.48
+as,628952114223,Tanker Truck Driver,Tanker Truck Driver,57.54,58.36,53.48,69.66
+as,628952114223,Driver,Tanker Truck Driver,55.64,57.17,50.23,69.66
+as,628952114223,HSE Associates,Tanker Truck Driver,51.96,57.96,53.77,14.68
+k,628952114223,Tanker Truck Driver,Tanker Truck Driver,57.54,58.36,53.48,69.66
+k,628952114223,Driver,Tanker Truck Driver,55.64,57.17,50.23,69.66
+k,628952114223,Accounting Staff,Tanker Truck Driver,52.4,60.08,51.66,16.88
+k,628952114223,Tax Staff,Tanker Truck Driver,52.22,55.99,56.18,17.53
+k,628952114223,HSE Associates,Tanker Truck Driver,51.96,57.96,53.77,14.68
+ok,628952114223,Tanker Truck Driver,Tanker Truck Driver,57.54,58.36,53.48,69.66
+ok,628952114223,Driver,Tanker Truck Driver,55.64,57.17,50.23,69.66
+ok,628952114223,Accounting Staff,Tanker Truck Driver,52.4,60.08,51.66,16.88
+ok,628952114223,Tax Staff,Tanker Truck Driver,52.22,55.99,56.18,17.53
+ok,628952114223,HSE Associates,Tanker Truck Driver,51.96,57.96,53.77,14.68
+mm,628952114223,Tanker Truck Driver,Tanker Truck Driver,57.54,58.36,53.48,69.66
+mm,628952114223,Driver,Tanker Truck Driver,55.64,57.17,50.23,69.66
+mm,628952114223,Accounting Staff,Finance Staff,67.04,72.6,60.03,67.31
+mm,628952114223,Tax Staff,Finance Staff,66.1,61.53,73.49,59.4
+mm,628952114223,HSE Associates,Tanker Truck Driver,51.96,57.96,53.77,14.68
+mm,628952114223,Finance Staff,Finance Staff,73.52,70.55,73.82,87.21
+mm,628952114223,Cashflow Management Staff,Finance Staff,67.79,63.37,69.39,83.48
+mm,628952114223,Budget Control Analyst,Finance Staff,67.4,62.75,69.2,83.48
